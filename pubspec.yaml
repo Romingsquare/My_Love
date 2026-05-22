@@ -50,4 +50,6 @@ flutter:
     - assets/images/
     - assets/images/memories/
     - assets/sounds/
+    - assets/sounds/tick.mp3
     - assets/data/
+    - assets/data/memories.json

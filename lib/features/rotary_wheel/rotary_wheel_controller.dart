@@ -163,18 +163,27 @@ class RotaryWheelController extends ChangeNotifier {
     try {
       // Create a new player instance for each tick to allow overlapping sounds
       final player = AudioPlayer();
-      await player.setAsset('assets/sounds/tick.mp3');
+      
+      // Set audio session for Android/iOS
+      await player.setAudioSource(
+        AudioSource.asset('assets/sounds/tick.mp3'),
+        preload: true,
+      );
+      
       await player.setVolume(0.6);
+      
+      // Play and dispose after completion
       await player.play();
       
-      // Dispose after playing
+      // Listen for completion and dispose
       player.playerStateStream.listen((state) {
         if (state.processingState == ProcessingState.completed) {
           player.dispose();
         }
       });
     } catch (e) {
-      // Silently fail if audio can't play
+      // Log error in debug mode, silently fail in release
+      debugPrint('Error playing tick sound: $e');
     }
   }
   

@@ -233,27 +233,34 @@ class _MemoryConstellation extends StatelessWidget {
     final fieldWidth  = screenSize.width;
     final fieldHeight = screenSize.height * 0.65;
 
+    // Sort memories by date for proper left-to-right ordering
+    final sortedMemories = memories.toList()..sort((a, b) => a.date.compareTo(b.date));
+    
+    // Group memories by day to handle same-day positioning
+    final memoriesByDay = <int, List<Memory>>{};
+    for (var memory in sortedMemories) {
+      memoriesByDay.putIfAbsent(memory.date.day, () => []).add(memory);
+    }
+    
+    // Calculate positions with collision avoidance
+    final positions = _calculatePositions(sortedMemories, memoriesByDay, fieldWidth, fieldHeight);
+    
     return Positioned(
       top: 0, left: 0, right: 0,
       height: fieldHeight,
       child: Stack(
-        children: memories.asMap().entries.map((e) {
+        children: sortedMemories.asMap().entries.map((e) {
           final index  = e.key;
           final memory = e.value;
-
-          final monthDiff = (memory.date.year - year) * 12 + (memory.date.month - month);
-          final xNorm = 0.5 + memory.cosmosOffsetX + monthDiff * 0.14;
-          // Use memory's own cosmosOffsetY for positioning (no index stacking)
-          // This allows multiple memories on same day to appear at different heights
-          final yNorm = 0.35 + memory.cosmosOffsetY;
+          final pos = positions[memory.id]!;
 
           final parallax = (cosmosShift * 0.05) % 1.0;
-          final px = ((xNorm - parallax) % 1.0) * fieldWidth;
-          final py = yNorm.clamp(0.20, 0.75) * fieldHeight;
+          final px = ((pos.xNorm - parallax) % 1.0) * fieldWidth;
+          final py = pos.yNorm * fieldHeight;
 
-          final distFromCenter = (xNorm - 0.5).abs();
-          final scale   = (1.0 - distFromCenter * 0.4).clamp(0.65, 1.0);
-          final opacity = (1.0 - distFromCenter * 0.6).clamp(0.3, 1.0);
+          final distFromCenter = (pos.xNorm - 0.5).abs();
+          final scale   = (1.0 - distFromCenter * 0.25).clamp(0.75, 1.0);
+          final opacity = (1.0 - distFromCenter * 0.4).clamp(0.5, 1.0);
 
           return Positioned(
             left: px - 60,
@@ -273,4 +280,96 @@ class _MemoryConstellation extends StatelessWidget {
       ),
     );
   }
+
+  Map<int, _NodePosition> _calculatePositions(
+    List<Memory> sortedMemories,
+    Map<int, List<Memory>> memoriesByDay,
+    double fieldWidth,
+    double fieldHeight,
+  ) {
+    final positions = <int, _NodePosition>{};
+    final placedPositions = <_NodePosition>[];
+    
+    const minDistance = 0.08; // Minimum distance between nodes (8% of screen)
+    const maxAttempts = 50; // Max collision resolution attempts
+    
+    for (var memory in sortedMemories) {
+      final dayOfMonth = memory.date.day;
+      final daysInMonth = DateTime(memory.date.year, memory.date.month + 1, 0).day;
+      
+      // X position based on day of month with margins
+      final dayProgress = (dayOfMonth - 1) / math.max(1, daysInMonth - 1);
+      final baseXNorm = 0.20 + dayProgress * 0.60; // 20% to 80% range
+      
+      // Y position: Use full vertical space more evenly
+      final sameDayMemories = memoriesByDay[dayOfMonth]!;
+      final sameDayIndex = sameDayMemories.indexOf(memory);
+      final sameDayCount = sameDayMemories.length;
+      
+      // Distribute vertically across the full range
+      // Use cosmosOffsetY for base randomness, then spread same-day memories
+      final baseY = 0.50; // Center
+      final verticalSpread = 1.0; // Use full vertical range
+      
+      // Random offset from cosmosOffsetY (-0.5 to +0.5) * full spread
+      var yOffset = memory.cosmosOffsetY * verticalSpread;
+      
+      // For same-day memories, add vertical spacing
+      if (sameDayCount > 1) {
+        // Spread same-day memories vertically
+        final sameDaySpread = 0.15; // 15% spread per memory
+        yOffset += (sameDayIndex - sameDayCount / 2) * sameDaySpread;
+      }
+      
+      var xNorm = baseXNorm + memory.cosmosOffsetX * 0.08; // Small horizontal jitter
+      var yNorm = baseY + yOffset;
+      
+      // Clamp to safe bounds with good margins
+      xNorm = xNorm.clamp(0.20, 0.80);
+      yNorm = yNorm.clamp(0.20, 0.80);
+      
+      // Collision avoidance: try to find a position without overlap
+      var attempts = 0;
+      var hasCollision = true;
+      
+      while (hasCollision && attempts < maxAttempts) {
+        hasCollision = false;
+        
+        for (var placed in placedPositions) {
+          final dx = xNorm - placed.xNorm;
+          final dy = yNorm - placed.yNorm;
+          final distance = math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < minDistance) {
+            hasCollision = true;
+            
+            // Push away from collision
+            final angle = math.atan2(dy, dx);
+            xNorm += math.cos(angle) * 0.03;
+            yNorm += math.sin(angle) * 0.03;
+            
+            // Re-clamp
+            xNorm = xNorm.clamp(0.20, 0.80);
+            yNorm = yNorm.clamp(0.20, 0.80);
+            break;
+          }
+        }
+        
+        attempts++;
+      }
+      
+      final position = _NodePosition(xNorm: xNorm, yNorm: yNorm);
+      positions[memory.id] = position;
+      placedPositions.add(position);
+    }
+    
+    return positions;
+  }
+}
+
+class _NodePosition {
+  final double xNorm;
+  final double yNorm;
+  
+  const _NodePosition({required this.xNorm, required this.yNorm});
 }
