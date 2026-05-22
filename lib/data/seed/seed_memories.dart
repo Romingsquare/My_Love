@@ -1,155 +1,52 @@
 // lib/data/seed/seed_memories.dart
-// 10 beautifully crafted sample memories that populate the cosmos on first launch.
+// Loads memories from JSON file with support for images.
 
+import 'dart:convert';
 import 'dart:math';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import '../models/memory_model.dart';
 
-List<Memory> buildSeedMemories() {
-  final rand = Random(42); // deterministic — same cosmos layout every time
-
-  int nextId = 1;
-
-  Memory make({
-    required String title,
-    required DateTime date,
-    required String description,
-    String? quote,
-    String? locationName,
-    double? lat,
-    double? lon,
-    String? weather,
-    required List<String> tags,
-    required int moodColor,
-    required String iconKey,
-  }) {
-    return Memory(
-      id: nextId++,
-      title: title,
-      date: date,
-      description: description,
-      quote: quote,
-      locationName: locationName,
-      latitude: lat,
-      longitude: lon,
-      weather: weather,
-      tags: tags,
-      moodColorValue: moodColor,
-      iconKey: iconKey,
-      cosmosOffsetX: (rand.nextDouble() - 0.5) * 0.55,
-      cosmosOffsetY: (rand.nextDouble() - 0.5) * 0.38,
-    );
+Future<List<Memory>> buildSeedMemories() async {
+  try {
+    // Load JSON file from assets
+    final String jsonString = await rootBundle.loadString('assets/data/memories.json');
+    final List<dynamic> jsonList = json.decode(jsonString);
+    
+    final rand = Random(42); // deterministic cosmos layout
+    int nextId = 1;
+    
+    // Convert JSON to Memory objects
+    final memories = <Memory>[];
+    for (var jsonItem in jsonList) {
+      try {
+        final map = jsonItem as Map<String, dynamic>;
+        
+        memories.add(Memory(
+          id: nextId++,
+          title: map['title'] as String,
+          date: DateTime.parse(map['date'] as String),
+          description: map['description'] as String?,
+          quote: map['quote'] as String?,
+          imagePath: map['imagePath'] as String?,
+          locationName: map['locationName'] as String?,
+          tags: List<String>.from(map['tags'] ?? []),
+          moodColorValue: int.parse(map['moodColor'] as String),
+          iconKey: map['iconKey'] as String? ?? 'star',
+          cosmosOffsetX: (rand.nextDouble() - 0.5) * 0.55,
+          cosmosOffsetY: (rand.nextDouble() - 0.5) * 0.38,
+        ));
+      } catch (e) {
+        // Skip invalid memory and continue
+        debugPrint('Error parsing memory: $e');
+        continue;
+      }
+    }
+    
+    return memories;
+  } catch (e) {
+    // Return empty list if JSON fails to load
+    debugPrint('Error loading memories from JSON: $e');
+    return [];
   }
-
-  return [
-    make(
-      title: 'Hike in the Alps',
-      date: DateTime(2024, 3, 14),
-      description: 'Stood above the cloud line at dawn. Everything below was white and soft. Felt impossibly small and impossibly alive.',
-      quote: '"The mountain does not care if you summit. It only cares that you came."',
-      locationName: 'Chamonix-Mont-Blanc',
-      lat: 45.9237, lon: 6.8694,
-      weather: 'Clear · −4°C',
-      tags: ['#Adventure', '#Solitude', '#Nature'],
-      moodColor: 0xFF3B82F6,
-      iconKey: MemoryIcon.leaf,
-    ),
-    make(
-      title: 'Anniversary',
-      date: DateTime(2024, 6, 12),
-      description: 'Candlelight dinner at the old harbour. The kind of evening where time moves differently.',
-      quote: '"Some moments deserve to last forever."',
-      locationName: 'Porto, Portugal',
-      lat: 41.1579, lon: -8.6291,
-      weather: 'Warm · 22°C',
-      tags: ['#Love', '#Milestone', '#Gratitude'],
-      moodColor: 0xFFEF476F,
-      iconKey: MemoryIcon.heart,
-    ),
-    make(
-      title: 'Coffee with Sara',
-      date: DateTime(2024, 4, 7),
-      description: 'Two hours that felt like twenty minutes. Laughed until it hurt about nothing important and everything.',
-      locationName: 'The Little Espresso Bar, Berlin',
-      lat: 52.5200, lon: 13.4050,
-      weather: 'Overcast · 14°C',
-      tags: ['#Friendship', '#Connection'],
-      moodColor: 0xFFD4A843,
-      iconKey: MemoryIcon.coffee,
-    ),
-    make(
-      title: 'First Concert',
-      date: DateTime(2024, 2, 3),
-      description: 'Front row. The bass vibrated through the floor, through my chest. Music that becomes memory the moment it ends.',
-      locationName: 'Olympia, London',
-      weather: 'Rainy · 8°C',
-      tags: ['#Music', '#Joy', '#Firsts'],
-      moodColor: 0xFF8B5CF6,
-      iconKey: MemoryIcon.music,
-    ),
-    make(
-      title: 'Book I Finished',
-      date: DateTime(2024, 5, 21),
-      description: 'The culmination of thoughts and ink, finalized at the apex of spring. The final chapter felt less like an ending and more like an exhale.',
-      quote: '"The final chapter felt less like an ending and more like an exhale."',
-      locationName: 'The Writers Cabin',
-      lat: 45.0321, lon: -89.4421,
-      weather: 'Sunny · 19°C',
-      tags: ['#Creation', '#Milestone'],
-      moodColor: 0xFFD4A843,
-      iconKey: MemoryIcon.book,
-    ),
-    make(
-      title: 'Weekend in Barcelona',
-      date: DateTime(2024, 9, 9),
-      description: 'Woke up with no plans. Followed the city wherever it led. Gaudi, tapas, a rooftop at golden hour.',
-      locationName: 'Barcelona, Spain',
-      lat: 41.3851, lon: 2.1734,
-      weather: 'Sunny · 28°C',
-      tags: ['#Travel', '#Freedom', '#Architecture'],
-      moodColor: 0xFF06D6A0,
-      iconKey: MemoryIcon.plane,
-    ),
-    make(
-      title: 'Beach Day',
-      date: DateTime(2024, 8, 19),
-      description: 'Salt water, warm sand, cold drinks. The kind of day you photograph in your mind more than your phone.',
-      locationName: 'Algarve Coast, Portugal',
-      lat: 37.0179, lon: -7.9307,
-      weather: 'Blazing · 34°C',
-      tags: ['#Peace', '#Summer', '#Family'],
-      moodColor: 0xFFFFD166,
-      iconKey: MemoryIcon.camera,
-    ),
-    make(
-      title: 'Night Walks',
-      date: DateTime(2024, 10, 28),
-      description: 'The city at 2am is a different city. Quieter, stranger, more honest. Just me and the lamp-lit streets.',
-      locationName: 'Prague Old Town',
-      lat: 50.0755, lon: 14.4378,
-      weather: 'Cold · 7°C · Clear',
-      tags: ['#Solitude', '#Night', '#Reflection'],
-      moodColor: 0xFF8B5CF6,
-      iconKey: MemoryIcon.star,
-    ),
-    make(
-      title: 'The Long Drive',
-      date: DateTime(2023, 7, 4),
-      description: '6 hours, no destination. Windows down. A playlist built over three years. The drive that felt like a conversation with myself.',
-      weather: 'Partly cloudy · 21°C',
-      tags: ['#Freedom', '#Music', '#Reflection'],
-      moodColor: 0xFF3B82F6,
-      iconKey: MemoryIcon.music,
-    ),
-    make(
-      title: 'New Year Midnight',
-      date: DateTime(2024, 1, 1),
-      description: 'Standing on the balcony. The fireworks painted the sky in colours that had no names. Felt the weight and lightness of a new beginning.',
-      quote: '"Every beginning is the end of something older, and I am grateful for both."',
-      locationName: 'Home',
-      weather: 'Clear · 2°C',
-      tags: ['#Reflection', '#Gratitude', '#Beginning'],
-      moodColor: 0xFFD4A843,
-      iconKey: MemoryIcon.sparkle,
-    ),
-  ];
 }

@@ -9,6 +9,8 @@ import '../models/memory_model.dart';
 import '../seed/seed_memories.dart';
 
 const _storageKey = 'chronos_memories';
+const _versionKey = 'chronos_version';
+const _currentVersion = 3; // Increment this when you update JSON
 
 class MemoryRepository {
   final SharedPreferences _prefs;
@@ -18,11 +20,22 @@ class MemoryRepository {
     final prefs = await SharedPreferences.getInstance();
     final repo = MemoryRepository._(prefs);
 
-    // Seed on first run
-    if (repo._getRawList().isEmpty) {
-      for (final m in buildSeedMemories()) {
+    // Check version - reload from JSON if version changed or first run
+    final savedVersion = prefs.getInt(_versionKey) ?? 0;
+    final needsReload = savedVersion != _currentVersion || repo._getRawList().isEmpty;
+
+    if (needsReload) {
+      // Clear old data
+      await prefs.remove(_storageKey);
+      
+      // Load from JSON
+      final seedMemories = await buildSeedMemories();
+      for (final m in seedMemories) {
         await repo.save(m);
       }
+      
+      // Save current version
+      await prefs.setInt(_versionKey, _currentVersion);
     }
 
     return repo;

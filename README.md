@@ -1,17 +1,57 @@
-# chronos_archive
+# Chronos Archive - Memory App
 
-A new Flutter project.
+A beautiful gift app for your girlfriend with pre-loaded memories and photos.
 
-## Getting Started
+## How to Add Memories
 
-This project is a starting point for a Flutter application.
+### 1. Edit JSON File
+Open `assets/data/memories.json` and add your memories:
 
-A few resources to get you started if this is your first Flutter project:
+```json
+{
+  "title": "Our First Date",
+  "date": "2024-02-14",
+  "description": "The day everything changed...",
+  "quote": "You smiled, and I knew.",
+  "imagePath": "assets/images/memories/first_date.jpg",
+  "locationName": "Café Luna",
+  "tags": ["#Love", "#Special"],
+  "moodColor": "0xFFEF476F",
+  "iconKey": "heart"
+}
+```
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+### 2. Add Photos
+- Place images in `assets/images/memories/`
+- Reference them in JSON: `"imagePath": "assets/images/memories/photo.jpg"`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 3. Increment Version (Important!)
+Open `lib/data/repositories/memory_repository.dart` and change:
+```dart
+const _currentVersion = 2; // Change to 3, 4, 5... each time you update JSON
+```
+
+### 4. Rebuild App
+```bash
+flutter run
+```
+
+**Note:** Incrementing the version forces the app to reload from JSON. Without this, it will use cached data.
+
+## Available Icons
+heart, star, camera, music, plane, book, coffee, sparkle, leaf
+
+## Color Examples
+- Red/Pink: `0xFFEF476F`
+- Blue: `0xFF3B82F6`
+- Purple: `0xFF8B5CF6`
+- Gold: `0xFFD4A843`
+- Yellow: `0xFFFFD166`
+- Green: `0xFF06D6A0`
+
+## Features
+- ✅ JSON-based memory management
+- ✅ Asset image support
+- ✅ Rotary wheel with tick sound
+- ✅ Beautiful cosmos visualization
+- ✅ Memory detail view with photos

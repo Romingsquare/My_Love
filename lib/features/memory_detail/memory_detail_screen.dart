@@ -267,16 +267,119 @@ class _PhotoCard extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(20, 0, 40, 16),
       child: Transform.rotate(
         angle: -0.04,
-        child: GlassCard(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: imagePath.startsWith('http')
-                ? Image.network(imagePath, height: 200, width: double.infinity, fit: BoxFit.cover)
-                : Image.file(File(imagePath), height: 200, width: double.infinity, fit: BoxFit.cover),
+        child: GestureDetector(
+          onTap: () => _showFullImage(context),
+          child: GlassCard(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: _buildImage(),
+            ),
           ),
         ),
       ),
     ).animate().fadeIn(delay: 300.ms).slideX(begin: -0.05, end: 0);
+  }
+
+  void _showFullImage(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => _FullImageViewer(imagePath: imagePath),
+      ),
+    );
+  }
+
+  Widget _buildImage() {
+    // Network image (starts with http/https)
+    if (imagePath.startsWith('http')) {
+      return Image.network(
+        imagePath,
+        height: 200,
+        width: double.infinity,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return Container(
+            height: 200,
+            color: Colors.grey.withValues(alpha: 0.2),
+            child: const Center(child: Icon(Icons.broken_image, color: Colors.grey)),
+          );
+        },
+      );
+    }
+    
+    // Asset image (starts with assets/)
+    if (imagePath.startsWith('assets/')) {
+      return Image.asset(
+        imagePath,
+        height: 200,
+        width: double.infinity,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return Container(
+            height: 200,
+            color: Colors.grey.withValues(alpha: 0.2),
+            child: const Center(child: Icon(Icons.image_not_supported, color: Colors.grey)),
+          );
+        },
+      );
+    }
+    
+    // Local file path
+    return Image.file(
+      File(imagePath),
+      height: 200,
+      width: double.infinity,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) {
+        return Container(
+          height: 200,
+          color: Colors.grey.withValues(alpha: 0.2),
+          child: const Center(child: Icon(Icons.image, color: Colors.grey)),
+        );
+      },
+    );
+  }
+}
+
+// ── Full Image Viewer ───────────────────────────────────────────────────────
+class _FullImageViewer extends StatelessWidget {
+  final String imagePath;
+  const _FullImageViewer({required this.imagePath});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Stack(
+        children: [
+          Center(
+            child: InteractiveViewer(
+              minScale: 0.5,
+              maxScale: 4.0,
+              child: _buildFullImage(),
+            ),
+          ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: IconButton(
+                icon: const Icon(Icons.close, color: Colors.white, size: 32),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFullImage() {
+    if (imagePath.startsWith('http')) {
+      return Image.network(imagePath, fit: BoxFit.contain);
+    }
+    if (imagePath.startsWith('assets/')) {
+      return Image.asset(imagePath, fit: BoxFit.contain);
+    }
+    return Image.file(File(imagePath), fit: BoxFit.contain);
   }
 }
 

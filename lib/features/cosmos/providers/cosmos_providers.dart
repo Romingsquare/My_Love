@@ -5,20 +5,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../data/models/memory_model.dart';
 import '../../../data/repositories/memory_repository.dart';
-import '../../../data/seed/seed_memories.dart';
 
 // ── Repository provider ───────────────────────────────────────────────────
 final memoryRepositoryProvider = FutureProvider<MemoryRepository>((ref) async {
-  final repo = await MemoryRepository.init();
-
-  // Seed on first run
-  if (repo.count == 0) {
-    for (final m in buildSeedMemories()) {
-      await repo.save(m);
-    }
-  }
-
-  return repo;
+  return await MemoryRepository.init();
 });
 
 // ── All memories provider ─────────────────────────────────────────────────

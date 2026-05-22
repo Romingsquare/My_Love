@@ -243,11 +243,11 @@ class _MemoryConstellation extends StatelessWidget {
 
           final monthDiff = (memory.date.year - year) * 12 + (memory.date.month - month);
           final xNorm = 0.5 + memory.cosmosOffsetX + monthDiff * 0.14;
-          final yNorm = 0.22 + memory.cosmosOffsetY + index * 0.045;
+          final yNorm = 0.35 + memory.cosmosOffsetY + index * 0.055;
 
           final parallax = (cosmosShift * 0.05) % 1.0;
           final px = ((xNorm - parallax) % 1.0) * fieldWidth;
-          final py = yNorm.clamp(0.05, 0.85) * fieldHeight;
+          final py = yNorm.clamp(0.20, 0.75) * fieldHeight;
 
           final distFromCenter = (xNorm - 0.5).abs();
           final scale   = (1.0 - distFromCenter * 0.4).clamp(0.65, 1.0);
