@@ -243,7 +243,9 @@ class _MemoryConstellation extends StatelessWidget {
 
           final monthDiff = (memory.date.year - year) * 12 + (memory.date.month - month);
           final xNorm = 0.5 + memory.cosmosOffsetX + monthDiff * 0.14;
-          final yNorm = 0.35 + memory.cosmosOffsetY + index * 0.055;
+          // Use memory's own cosmosOffsetY for positioning (no index stacking)
+          // This allows multiple memories on same day to appear at different heights
+          final yNorm = 0.35 + memory.cosmosOffsetY;
 
           final parallax = (cosmosShift * 0.05) % 1.0;
           final px = ((xNorm - parallax) % 1.0) * fieldWidth;

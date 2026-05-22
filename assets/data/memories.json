@@ -1,4 +1,15 @@
 [
+     {
+    "title": "First Message",
+    "date": "2020-10-30",
+    "description": "She messaged me. Or i did can't remember but we begain to Talk",
+    "quote": "The mountain does not care if you summit. It only cares that you came.",
+    "imagePath": "assets/images/memories/initialmessage1.png",
+    "locationName": "Facebook",
+    "tags": ["#FirstMeet", "#chat", "#really?"],
+    "moodColor": "0xFF3B82F6",
+    "iconKey": "leaf"
+  },
    {
     "title": "Busy Person",
     "date": "2020-11-01",
@@ -15,9 +26,53 @@
     "date": "2020-11-03",
     "description": "First Meeting My Love of my Life. She came in purple t-shirt at around 5:30 in the Morning",
     "quote": "The mountain does not care if you summit. It only cares that you came.",
-    "imagePath": "assets/images/memories/alps_hike.jpg",
+    "imagePath": "assets/images/memories/firstmeet.png",
     "locationName": "Butwal Chauraha",
     "tags": ["#FirstMeet", "#Morning", "#Running"],
+    "moodColor": "0xFF3B82F6",
+    "iconKey": "leaf"
+  },
+  {
+    "title": "Shares Pics",
+    "date": "2020-11-05",
+    "description": "She shares me her photos. Beautiful💗💗",
+    "quote": "The mountain does not care if you summit. It only cares that you came.",
+    "imagePath": "assets/images/memories/sharephoto1.png",
+    "locationName": "Facebook",
+    "tags": ["#PicShare", "#Beautiful"],
+    "moodColor": "0xFF3B82F6",
+    "iconKey": "leaf"
+  },
+  {
+    "title": "I purposed Her",
+    "date": "2020-11-05",
+    "description": "Yes i purposed her, The same beautiful i met 2 days ago, Crazy RIGHT",
+    "quote": "The mountain does not care if you summit. It only cares that you came.",
+    "imagePath": "assets/images/memories/purpose.jpg",
+    "locationName": "Hillllpark",
+    "tags": ["#Purpose", "#Hillpark", "#I LOVE YOU"],
+    "moodColor": "0xFF3B82F6",
+    "iconKey": "love"
+  },
+  {
+    "title": "Shares Pics 2",
+    "date": "2020-11-05",
+    "description": "She shares me her more photos. Beautiful💗💗",
+    "quote": "The mountain does not care if you summit. It only cares that you came.",
+    "imagePath": "assets/images/memories/sharephoto2.jpg",
+    "locationName": "Facebook",
+    "tags": ["#PicShare", "#Beautiful", "#Photo"],
+    "moodColor": "0xFF3B82F6",
+    "iconKey": "leaf"
+  },
+  {
+    "title": "I was scared",
+    "date": "2020-11-06",
+    "description": "She Tried to make me scared. I was terified. OH GOd! ",
+    "quote": "The mountain does not care if you summit. It only cares that you came.",
+    "imagePath": "assets/images/memories/makescare.jpg",
+    "locationName": "Facebook",
+    "tags": ["#PicShare", "#Beautiful", "#Photo"],
     "moodColor": "0xFF3B82F6",
     "iconKey": "leaf"
   },

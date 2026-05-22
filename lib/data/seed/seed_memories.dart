@@ -13,7 +13,6 @@ Future<List<Memory>> buildSeedMemories() async {
     final String jsonString = await rootBundle.loadString('assets/data/memories.json');
     final List<dynamic> jsonList = json.decode(jsonString);
     
-    final rand = Random(42); // deterministic cosmos layout
     int nextId = 1;
     
     // Convert JSON to Memory objects
@@ -21,9 +20,13 @@ Future<List<Memory>> buildSeedMemories() async {
     for (var jsonItem in jsonList) {
       try {
         final map = jsonItem as Map<String, dynamic>;
+        final memoryId = nextId++;
+        
+        // Use memory ID as seed for consistent random positioning
+        final rand = Random(memoryId * 42);
         
         memories.add(Memory(
-          id: nextId++,
+          id: memoryId,
           title: map['title'] as String,
           date: DateTime.parse(map['date'] as String),
           description: map['description'] as String?,
@@ -33,8 +36,9 @@ Future<List<Memory>> buildSeedMemories() async {
           tags: List<String>.from(map['tags'] ?? []),
           moodColorValue: int.parse(map['moodColor'] as String),
           iconKey: map['iconKey'] as String? ?? 'star',
-          cosmosOffsetX: (rand.nextDouble() - 0.5) * 0.55,
-          cosmosOffsetY: (rand.nextDouble() - 0.5) * 0.38,
+          // Each memory gets unique but consistent offset based on its ID
+          cosmosOffsetX: (rand.nextDouble() - 0.5) * 0.6,
+          cosmosOffsetY: (rand.nextDouble() - 0.5) * 0.45,
         ));
       } catch (e) {
         // Skip invalid memory and continue

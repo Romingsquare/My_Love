@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
 import '../../core/theme/app_theme.dart';
@@ -289,20 +290,23 @@ class _PhotoCard extends StatelessWidget {
   }
 
   Widget _buildImage() {
-    // Network image (starts with http/https)
+    // Network image (starts with http/https) - use cached version
     if (imagePath.startsWith('http')) {
-      return Image.network(
-        imagePath,
+      return CachedNetworkImage(
+        imageUrl: imagePath,
         height: 200,
         width: double.infinity,
         fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) {
-          return Container(
-            height: 200,
-            color: Colors.grey.withValues(alpha: 0.2),
-            child: const Center(child: Icon(Icons.broken_image, color: Colors.grey)),
-          );
-        },
+        placeholder: (context, url) => Container(
+          height: 200,
+          color: Colors.grey.withValues(alpha: 0.2),
+          child: const Center(child: CircularProgressIndicator()),
+        ),
+        errorWidget: (context, url, error) => Container(
+          height: 200,
+          color: Colors.grey.withValues(alpha: 0.2),
+          child: const Center(child: Icon(Icons.broken_image, color: Colors.grey)),
+        ),
       );
     }
     
@@ -313,6 +317,7 @@ class _PhotoCard extends StatelessWidget {
         height: 200,
         width: double.infinity,
         fit: BoxFit.cover,
+        cacheWidth: 1200, // Optimize memory usage
         errorBuilder: (context, error, stackTrace) {
           return Container(
             height: 200,
@@ -329,6 +334,7 @@ class _PhotoCard extends StatelessWidget {
       height: 200,
       width: double.infinity,
       fit: BoxFit.cover,
+      cacheWidth: 1200, // Optimize memory usage
       errorBuilder: (context, error, stackTrace) {
         return Container(
           height: 200,
@@ -374,7 +380,12 @@ class _FullImageViewer extends StatelessWidget {
 
   Widget _buildFullImage() {
     if (imagePath.startsWith('http')) {
-      return Image.network(imagePath, fit: BoxFit.contain);
+      return CachedNetworkImage(
+        imageUrl: imagePath,
+        fit: BoxFit.contain,
+        placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+        errorWidget: (context, url, error) => const Center(child: Icon(Icons.broken_image, color: Colors.white)),
+      );
     }
     if (imagePath.startsWith('assets/')) {
       return Image.asset(imagePath, fit: BoxFit.contain);

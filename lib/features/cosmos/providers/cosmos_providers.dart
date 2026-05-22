@@ -17,14 +17,14 @@ final allMemoriesProvider = FutureProvider<List<Memory>>((ref) async {
   return repo.getAllMemories();
 });
 
-// ── Visible memories (within ±2 months of current time position) ──────────
+// ── Visible memories (only for the current month) ─────────────────────────
 final visibleMemoriesProvider = Provider.family<List<Memory>, ({int year, int month})>(
   (ref, args) {
     final allAsync = ref.watch(allMemoriesProvider);
     return allAsync.whenData((memories) {
       return memories.where((m) {
-        final diff = (m.date.year - args.year) * 12 + (m.date.month - args.month);
-        return diff.abs() <= 3;
+        // Only show memories that match the exact year and month
+        return m.date.year == args.year && m.date.month == args.month;
       }).toList();
     }).valueOrNull ?? [];
   },

@@ -44,8 +44,12 @@ class RotaryWheelController extends ChangeNotifier {
   }
   
   int get currentMonth {
+    // fractionalMonth gives us 0-11.99... range
+    // Round it to get 0-11 integer
     final m = fractionalMonth.round() % 12;
-    return m <= 0 ? m + 12 : m;
+    // Add 1 to convert to DateTime's 1-12 range
+    // 0 -> 1 (JAN), 1 -> 2 (FEB), ..., 10 -> 11 (NOV), 11 -> 12 (DEC)
+    return m + 1;
   }
   
   void _onTick(Duration elapsed) {
