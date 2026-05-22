@@ -6,7 +6,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:just_audio/just_audio.dart';
 
 class RotaryWheelController extends ChangeNotifier {
@@ -130,7 +129,7 @@ class RotaryWheelController extends ChangeNotifier {
       _velocity = delta * 0.15 * 60;
     } else {
       _angle = nearest;
-      HapticFeedback.lightImpact();
+      // Removed haptic feedback to eliminate vibration
     }
     notifyListeners();
   }

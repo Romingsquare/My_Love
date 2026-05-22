@@ -38,37 +38,43 @@ class MemoryNodeWidget extends StatelessWidget {
       opacity: opacity.clamp(0.0, 1.0),
       child: Transform.scale(
         scale: scale,
-        child: GestureDetector(
-          onTap: onTap,
-          behavior: HitTestBehavior.opaque,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // ── Glow Node ───────────────────────────────
-              _GlowNode(color: nodeColor, icon: icon, index: animIndex),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // ── Glow Node (clickable) ───────────────────────────────
+            GestureDetector(
+              onTap: onTap,
+              behavior: HitTestBehavior.opaque,
+              child: _GlowNode(color: nodeColor, icon: icon, index: animIndex),
+            ),
 
-              // ── Dotted connector line ───────────────────
-              _DottedLine(color: nodeColor),
+            // ── Dotted connector line (non-clickable) ───────────────────
+            IgnorePointer(
+              child: _DottedLine(color: nodeColor),
+            ),
 
-              const SizedBox(height: 4),
+            const SizedBox(height: 4),
 
-              // ── Memory title ────────────────────────────
-              Text(
+            // ── Memory title (non-clickable) ────────────────────────────
+            IgnorePointer(
+              child: Text(
                 memory.title,
                 style: AppTextStyles.nodeTitleStyle,
                 textAlign: TextAlign.center,
                 maxLines: 2,
               ),
+            ),
 
-              const SizedBox(height: 2),
+            const SizedBox(height: 2),
 
-              // ── Date label ──────────────────────────────
-              Text(
+            // ── Date label (non-clickable) ──────────────────────────────
+            IgnorePointer(
+              child: Text(
                 _formatDate(memory.date),
                 style: AppTextStyles.nodeDateStyle,
               ),
-            ],
-          ),
+            ),
+          ],
         )
         // Floating oscillation animation
         .animate(
