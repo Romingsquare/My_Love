@@ -158,31 +158,38 @@ class RotaryWheelController extends ChangeNotifier {
     }
   }
   
-  void _playTickSound() async {
+  void _playTickSound() {
+    // Use unawaited to fire and forget - don't block the UI thread
+    _playTickSoundAsync();
+  }
+  
+  Future<void> _playTickSoundAsync() async {
+    AudioPlayer? player;
     try {
       // Create a new player instance for each tick to allow overlapping sounds
-      final player = AudioPlayer();
+      player = AudioPlayer();
       
-      // Set audio session for Android/iOS
-      await player.setAudioSource(
-        AudioSource.asset('assets/sounds/tick.mp3'),
-        preload: true,
-      );
+      // Set audio source with proper error handling
+      // Note: File is tick.MP3 (uppercase extension)
+      await player.setAsset('assets/sounds/tick.MP3');
       
+      // Set volume
       await player.setVolume(0.6);
       
-      // Play and dispose after completion
+      // Play the sound
       await player.play();
       
-      // Listen for completion and dispose
-      player.playerStateStream.listen((state) {
-        if (state.processingState == ProcessingState.completed) {
-          player.dispose();
-        }
-      });
+      // Wait for completion before disposing
+      await player.processingStateStream.firstWhere(
+        (state) => state == ProcessingState.completed,
+      );
+      
     } catch (e) {
       // Log error in debug mode, silently fail in release
       debugPrint('Error playing tick sound: $e');
+    } finally {
+      // Always dispose the player
+      await player?.dispose();
     }
   }
   

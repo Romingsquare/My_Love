@@ -130,4 +130,26 @@ class MemoryIcon {
   static const String coffee  = 'coffee';
   static const String sparkle = 'sparkle';
   static const String leaf    = 'leaf';
+  
+  // Additional icons
+  static const String cake    = 'cake';        // birthdays, celebrations
+  static const String gift    = 'gift';        // presents, surprises
+  static const String home    = 'home';        // home, family
+  static const String beach   = 'beach';       // beach, vacation
+  static const String mountain = 'mountain';   // hiking, adventure
+  static const String food    = 'food';        // dining, meals
+  static const String movie   = 'movie';       // cinema, films
+  static const String game    = 'game';        // gaming, sports
+  static const String pet     = 'pet';         // pets, animals
+  static const String car     = 'car';         // road trips, driving
+  static const String bike    = 'bike';        // cycling, biking
+  static const String run     = 'run';         // running, fitness
+  static const String paint   = 'paint';       // art, creativity
+  static const String school  = 'school';      // education, learning
+  static const String work    = 'work';        // career, achievements
+  static const String chat    = 'chat';        // conversations, messages
+  static const String laugh   = 'laugh';       // funny moments
+  static const String sunset  = 'sunset';      // beautiful views
+  static const String rain    = 'rain';        // rainy days
+  static const String snow    = 'snow';        // winter, snow
 }

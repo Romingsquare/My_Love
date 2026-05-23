@@ -20,6 +20,13 @@ Future<List<Memory>> buildSeedMemories() async {
     for (var jsonItem in jsonList) {
       try {
         final map = jsonItem as Map<String, dynamic>;
+        
+        // Skip memories marked as hidden or examples
+        final isHidden = map['hidden'] as bool? ?? false;
+        if (isHidden) {
+          continue;
+        }
+        
         final memoryId = nextId++;
         
         // Use memory ID as seed for consistent random positioning

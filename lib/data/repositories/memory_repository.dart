@@ -10,7 +10,7 @@ import '../seed/seed_memories.dart';
 
 const _storageKey = 'chronos_memories';
 const _versionKey = 'chronos_version';
-const _currentVersion = 2; // Increment this when you update JSON
+const _currentVersion = 5; // Increment this when you update JSON
 
 class MemoryRepository {
   final SharedPreferences _prefs;

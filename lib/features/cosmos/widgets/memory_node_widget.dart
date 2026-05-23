@@ -98,15 +98,38 @@ class MemoryNodeWidget extends StatelessWidget {
 
   IconData _iconForKey(String key) {
     switch (key) {
-      case MemoryIcon.camera:  return Icons.photo_camera_outlined;
-      case MemoryIcon.heart:   return Icons.favorite_outline;
-      case MemoryIcon.music:   return Icons.music_note_outlined;
-      case MemoryIcon.plane:   return Icons.flight_outlined;
-      case MemoryIcon.book:    return Icons.menu_book_outlined;
-      case MemoryIcon.coffee:  return Icons.coffee_outlined;
-      case MemoryIcon.sparkle: return Icons.auto_awesome_outlined;
-      case MemoryIcon.leaf:    return Icons.eco_outlined;
-      default:                 return Icons.star_outline;
+      case MemoryIcon.camera:   return Icons.photo_camera_outlined;
+      case MemoryIcon.heart:    return Icons.favorite_outline;
+      case MemoryIcon.music:    return Icons.music_note_outlined;
+      case MemoryIcon.plane:    return Icons.flight_outlined;
+      case MemoryIcon.book:     return Icons.menu_book_outlined;
+      case MemoryIcon.coffee:   return Icons.coffee_outlined;
+      case MemoryIcon.sparkle:  return Icons.auto_awesome_outlined;
+      case MemoryIcon.leaf:     return Icons.eco_outlined;
+      
+      // Additional icons
+      case MemoryIcon.cake:     return Icons.cake_outlined;
+      case MemoryIcon.gift:     return Icons.card_giftcard_outlined;
+      case MemoryIcon.home:     return Icons.home_outlined;
+      case MemoryIcon.beach:    return Icons.beach_access_outlined;
+      case MemoryIcon.mountain: return Icons.terrain_outlined;
+      case MemoryIcon.food:     return Icons.restaurant_outlined;
+      case MemoryIcon.movie:    return Icons.movie_outlined;
+      case MemoryIcon.game:     return Icons.sports_esports_outlined;
+      case MemoryIcon.pet:      return Icons.pets_outlined;
+      case MemoryIcon.car:      return Icons.directions_car_outlined;
+      case MemoryIcon.bike:     return Icons.directions_bike_outlined;
+      case MemoryIcon.run:      return Icons.directions_run_outlined;
+      case MemoryIcon.paint:    return Icons.palette_outlined;
+      case MemoryIcon.school:   return Icons.school_outlined;
+      case MemoryIcon.work:     return Icons.work_outline;
+      case MemoryIcon.chat:     return Icons.chat_bubble_outline;
+      case MemoryIcon.laugh:    return Icons.sentiment_very_satisfied_outlined;
+      case MemoryIcon.sunset:   return Icons.wb_twilight_outlined;
+      case MemoryIcon.rain:     return Icons.water_drop_outlined;
+      case MemoryIcon.snow:     return Icons.ac_unit_outlined;
+      
+      default:                  return Icons.star_outline;
     }
   }
 }
