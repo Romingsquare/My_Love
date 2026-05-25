@@ -294,9 +294,9 @@ class _PhotoCard extends StatelessWidget {
     if (imagePath.startsWith('http')) {
       return CachedNetworkImage(
         imageUrl: imagePath,
-        height: 200,
         width: double.infinity,
-        fit: BoxFit.cover,
+        fit: BoxFit.contain,
+        memCacheWidth: 800,
         placeholder: (context, url) => Container(
           height: 200,
           color: Colors.grey.withValues(alpha: 0.2),
@@ -314,10 +314,9 @@ class _PhotoCard extends StatelessWidget {
     if (imagePath.startsWith('assets/')) {
       return Image.asset(
         imagePath,
-        height: 200,
         width: double.infinity,
-        fit: BoxFit.cover,
-        cacheWidth: 1200, // Optimize memory usage
+        fit: BoxFit.contain,
+        cacheWidth: 800,
         errorBuilder: (context, error, stackTrace) {
           return Container(
             height: 200,
@@ -331,10 +330,9 @@ class _PhotoCard extends StatelessWidget {
     // Local file path
     return Image.file(
       File(imagePath),
-      height: 200,
       width: double.infinity,
-      fit: BoxFit.cover,
-      cacheWidth: 1200, // Optimize memory usage
+      fit: BoxFit.contain,
+      cacheWidth: 800,
       errorBuilder: (context, error, stackTrace) {
         return Container(
           height: 200,
@@ -383,14 +381,26 @@ class _FullImageViewer extends StatelessWidget {
       return CachedNetworkImage(
         imageUrl: imagePath,
         fit: BoxFit.contain,
+        memCacheWidth: 1920, // Full screen quality
+        memCacheHeight: 1920,
         placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
         errorWidget: (context, url, error) => const Center(child: Icon(Icons.broken_image, color: Colors.white)),
       );
     }
     if (imagePath.startsWith('assets/')) {
-      return Image.asset(imagePath, fit: BoxFit.contain);
+      return Image.asset(
+        imagePath,
+        fit: BoxFit.contain,
+        cacheWidth: 1920, // Full screen quality for zooming
+        cacheHeight: 1920,
+      );
     }
-    return Image.file(File(imagePath), fit: BoxFit.contain);
+    return Image.file(
+      File(imagePath),
+      fit: BoxFit.contain,
+      cacheWidth: 1920, // Full screen quality for zooming
+      cacheHeight: 1920,
+    );
   }
 }
 
