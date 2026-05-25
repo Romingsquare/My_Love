@@ -1,5 +1,5 @@
 [
-     {
+  {
     "id": 1,
     "title": "First Message",
     "date": "2020-10-30",
@@ -10,7 +10,7 @@
     "locationName": "Facebook",
     "tags": ["#FirstMeet", "#chat", "#really?"],
     "moodColor": "0xFF3B82F6",
-    "iconKey": "leaf"
+    "iconKey": "chat"
   },
   {
     "id": 2,
@@ -22,7 +22,7 @@
     "locationName": "Butwal Chauraha",
     "tags": ["#FirstMeet", "#Morning", "#Running"],
     "moodColor": "0xFF3B82F6",
-    "iconKey": "coffee"
+    "iconKey": "run"
   },
   {
     "id": 3,
@@ -33,8 +33,8 @@
     "imagePath": "assets/images/memories/firstmeet.png",
     "locationName": "Butwal Chauraha",
     "tags": ["#FirstMeet", "#Morning", "#Running"],
-    "moodColor": "0xFF3B82F6",
-    "iconKey": "music"
+    "moodColor": "0xFF8B5CF6",
+    "iconKey": "heart"
   },
   {
     "id": 4,
@@ -45,7 +45,7 @@
     "imagePath": "assets/images/memories/sharephoto1.png",
     "locationName": "Facebook",
     "tags": ["#PicShare", "#Beautiful"],
-    "moodColor": "0xFF3B82F6",
+    "moodColor": "0xFFEF476F",
     "iconKey": "camera"
   },
   {
@@ -57,7 +57,7 @@
     "imagePath": "assets/images/memories/purpose.png",
     "locationName": "Hillllpark",
     "tags": ["#Purpose", "#Hillpark", "#I LOVE YOU"],
-    "moodColor": "0xFF3B82F6",
+    "moodColor": "0xFFEF476F",
     "iconKey": "heart"
   },
   {
@@ -69,7 +69,7 @@
     "imagePath": "assets/images/memories/sharephoto2.png",
     "locationName": "Facebook",
     "tags": ["#PicShare", "#Beautiful", "#Photo"],
-    "moodColor": "0xFF3B82F6",
+    "moodColor": "0xFFEF476F",
     "iconKey": "camera"
   },
   {
@@ -93,7 +93,7 @@
     "imagePath": "assets/images/memories/running1.png",
     "locationName": "Facebook",
     "tags": ["#PicShare", "#Beautiful", "#Photo"],
-    "moodColor": "0xFF3B82F6",
+    "moodColor": "0xFF06D6A0",
     "iconKey": "run"
   },
   {
@@ -105,100 +105,262 @@
     "imagePath": "assets/images/memories/running2.png",
     "locationName": "Facebook",
     "tags": ["#PicShare", "#Beautiful", "#Photo"],
-    "moodColor": "0xFF3B82F6",
+    "moodColor": "0xFF06D6A0",
     "iconKey": "run"
   },
   {
     "id": 10,
-    "title": "Anniversary",
-    "date": "2024-06-12",
-    "description": "Candlelight dinner at the old harbour. The kind of evening where time moves differently.",
+    "title": "Dancing into the Woods",
+    "date": "2020-12-03",
+    "description": "Dancing Together in the woods.",
     "quote": "Some moments deserve to last forever.",
-    "imagePath": "assets/images/memories/anniversary.jpg",
-    "locationName": "Porto, Portugal",
-    "tags": ["#Love", "#Milestone", "#Gratitude"],
+    "imagePath": "assets/images/memories/dance1.png",
+    "locationName": "Hillpark",
+    "tags": ["#Love", "#Milestone", "#Dance"],
     "moodColor": "0xFFEF476F",
-    "iconKey": "heart"
-  },
-  {
-    "title": "Coffee with Sara",
-    "date": "2024-04-07",
-    "description": "Two hours that felt like twenty minutes. Laughed until it hurt about nothing important and everything.",
-    "imagePath": "assets/images/memories/coffee_sara.jpg",
-    "locationName": "The Little Espresso Bar, Berlin",
-    "tags": ["#Friendship", "#Connection"],
-    "moodColor": "0xFFD4A843",
-    "iconKey": "coffee"
-  },
-  {
-    "title": "First Concert",
-    "date": "2024-02-03",
-    "description": "Front row. The bass vibrated through the floor, through my chest. Music that becomes memory the moment it ends.",
-    "imagePath": "assets/images/memories/concert.jpg",
-    "locationName": "Olympia, London",
-    "tags": ["#Music", "#Joy", "#Firsts"],
-    "moodColor": "0xFF8B5CF6",
     "iconKey": "music"
   },
   {
-    "title": "Book I Finished",
-    "date": "2024-05-21",
-    "description": "The culmination of thoughts and ink, finalized at the apex of spring. The final chapter felt less like an ending and more like an exhale.",
-    "quote": "The final chapter felt less like an ending and more like an exhale.",
-    "imagePath": "assets/images/memories/book_finished.jpg",
-    "locationName": "The Writers Cabin",
-    "tags": ["#Creation", "#Milestone"],
+    "id": 11,
+    "title": "Sister Marriage",
+    "date": "2020-12-07",
+    "description": "It's Her sister's Marriage.",
+    "imagePath": "assets/images/memories/marriage1.png",
+    "locationName": "Butwal",
+    "tags": ["#Marriage", "#Beautiful"],
     "moodColor": "0xFFD4A843",
-    "iconKey": "book"
+    "iconKey": "heart"
   },
   {
-    "title": "Weekend in Barcelona",
-    "date": "2024-09-09",
-    "description": "Woke up with no plans. Followed the city wherever it led. Gaudi, tapas, a rooftop at golden hour.",
-    "imagePath": "assets/images/memories/barcelona.jpg",
-    "locationName": "Barcelona, Spain",
-    "tags": ["#Travel", "#Freedom", "#Architecture"],
-    "moodColor": "0xFF06D6A0",
-    "iconKey": "plane"
-  },
-  {
-    "title": "Beach Day",
-    "date": "2024-08-19",
-    "description": "Salt water, warm sand, cold drinks. The kind of day you photograph in your mind more than your phone.",
-    "imagePath": "assets/images/memories/beach_day.jpg",
-    "locationName": "Algarve Coast, Portugal",
-    "tags": ["#Peace", "#Summer", "#Family"],
-    "moodColor": "0xFFFFD166",
-    "iconKey": "camera"
-  },
-  {
-    "title": "Night Walks",
-    "date": "2024-10-28",
-    "description": "The city at 2am is a different city. Quieter, stranger, more honest. Just me and the lamp-lit streets.",
-    "imagePath": "assets/images/memories/night_walk.jpg",
-    "locationName": "Prague Old Town",
-    "tags": ["#Solitude", "#Night", "#Reflection"],
+    "id": 12,
+    "title": "She's Sleeping",
+    "date": "2021-01-27",
+    "description": "She Selept during our dates.",
+    "imagePath": "assets/images/memories/sleep1.png",
+    "locationName": "Ban Vatika",
+    "tags": ["#Sleep", "#Tired", "#SUn"],
     "moodColor": "0xFF8B5CF6",
     "iconKey": "star"
   },
   {
-    "title": "The Long Drive",
-    "date": "2023-07-04",
-    "description": "6 hours, no destination. Windows down. A playlist built over three years. The drive that felt like a conversation with myself.",
-    "imagePath": "assets/images/memories/long_drive.jpg",
-    "tags": ["#Freedom", "#Music", "#Reflection"],
+    "id": 13,
+    "title": "We Run Again Together",
+    "date": "2021-01-12",
+    "description": "We Begain Running again in the morning.",
+    "quote": "The final chapter felt less like an ending and more like an exhale.",
+    "imagePath": "assets/images/memories/running3.png",
+    "locationName": "Drivertole",
+    "tags": ["#Running", "#Together"],
+    "moodColor": "0xFF06D6A0",
+    "iconKey": "run"
+  },
+  {
+    "id": 14,
+    "title": "She's Eating",
+    "date": "2021-05-18",
+    "description": "I Brought Her something to eat at 5 o'clock",
+    "imagePath": "assets/images/memories/eat1.png",
+    "locationName": "Sankarnagar",
+    "tags": ["#Morning", "#Eat", "#Running"],
+    "moodColor": "0xFFD4A843",
+    "iconKey": "food"
+  },
+  {
+    "id": 15,
+    "title": "Sister's Marriage",
+    "date": "2021-05-25",
+    "description": "We going toegther in my sister's Marriage.",
+    "imagePath": "assets/images/memories/marriage2.png",
+    "locationName": "Bhumbai",
+    "tags": ["#Love", "#Marriage", "#Family"],
+    "moodColor": "0xFFEF476F",
+    "iconKey": "heart"
+  },
+  {
+    "id": 16,
+    "title": "She's far Away",
+    "date": "2021-07-17",
+    "description": "She's far from me, She went to ktm with her sister.",
+    "imagePath": "assets/images/memories/ktm1.png",
+    "locationName": "Kathmandu",
+    "tags": ["#Far", "#Missing"],
+    "moodColor": "0xFF8B5CF6",
+    "iconKey": "plane"
+  },
+  {
+    "id": 17,
+    "title": "Exam Day",
+    "date": "2021-09-02",
+    "description": "It was here exam day, We met after she gave the Exam.",
+    "imagePath": "assets/images/memories/exam1.png",
+    "locationName": "Hillpark",
+    "tags": ["#Exam", "#Food"],
     "moodColor": "0xFF3B82F6",
+    "iconKey": "school"
+  },
+  {
+    "id": 18,
+    "title": "Meeting Her Family",
+    "date": "2021-10-15",
+    "description": "First Meeting With her family members. Was so nervous!!!",
+    "imagePath": "assets/images/memories/family1.png",
+    "locationName": "CityVillage",
+    "tags": ["#Meeting", "#Nervous"],
+    "moodColor": "0xFF3B82F6",
+    "iconKey": "home"
+  },
+  {
+    "id": 19,
+    "title": "Oh What's That?",
+    "date": "2021-10-22",
+    "description": "Looks like some nibba nibbi couples",
+    "imagePath": "assets/images/memories/together1.png",
+    "locationName": "Lime&Lemon",
+    "tags": ["#Bday", "#Love"],
+    "moodColor": "0xFFEF476F",
+    "iconKey": "heart"
+  },
+  {
+    "id": 20,
+    "title": "It's Christmas",
+    "date": "2021-12-25",
+    "description": "Its Christmas Day",
+    "imagePath": "assets/images/memories/Christmas1.png",
+    "locationName": "BhatBhateni",
+    "tags": ["#Christmas", "#Tree"],
+    "moodColor": "0xFFEF476F",
+    "iconKey": "gift"
+  },
+  {
+    "id": 21,
+    "title": "She's Always Dancing",
+    "date": "2022-01-26",
+    "description": "She Dances all the time in front of me When She's Happy",
+    "imagePath": "assets/images/memories/dance2.png",
+    "locationName": "Call",
+    "tags": ["#Dance", "#Excited"],
+    "moodColor": "0xFFEF476F",
     "iconKey": "music"
   },
   {
-    "title": "New Year Midnight",
-    "date": "2024-01-01",
-    "description": "Standing on the balcony. The fireworks painted the sky in colours that had no names. Felt the weight and lightness of a new beginning.",
-    "quote": "Every beginning is the end of something older, and I am grateful for both.",
-    "imagePath": "assets/images/memories/new_year.jpg",
+    "id": 22,
+    "title": "Meeting",
+    "date": "2022-02-24",
+    "description": "We are meeting after my bartabanda.",
+    "imagePath": "assets/images/memories/meeting1.png",
+    "locationName": "Call",
+    "tags": ["#Meeting", "#Romantic"],
+    "moodColor": "0xFF8B5CF6",
+    "iconKey": "heart"
+  },
+  {
+    "id": 23,
+    "title": "Holi",
+    "date": "2022-03-18",
+    "description": "You made my Holi Special.",
+    "imagePath": "assets/images/memories/holi1.png",
     "locationName": "Home",
-    "tags": ["#Reflection", "#Gratitude", "#Beginning"],
-    "moodColor": "0xFFD4A843",
+    "tags": ["#Holi", "#Colors"],
+    "moodColor": "0xFFFFD166",
     "iconKey": "sparkle"
+  },
+  {
+    "id": 24,
+    "title": "Together",
+    "date": "2022-04-14",
+    "description": "I am Always so happy when we are together.",
+    "imagePath": "assets/images/memories/together2.png",
+    "locationName": "HillPark",
+    "tags": ["#Happy", "#Together"],
+    "moodColor": "0xFFEF476F",
+    "iconKey": "heart"
+  },
+  {
+    "id": 25,
+    "title": "Birthday",
+    "date": "2022-05-25",
+    "description": "It's your second birthday with me Bebo 'Her Second Birthday' ",
+    "imagePath": "assets/images/memories/birthday1.png",
+    "locationName": "Home",
+    "tags": ["#Happy", "#Together"],
+    "moodColor": "0xFFEF476F",
+    "iconKey": "cake"
+  },
+  {
+    "id": 26,
+    "title": "So Much Love",
+    "date": "2022-06-18",
+    "description": "Yes Soo much of love, we eat writing our names in our food. ",
+    "imagePath": "assets/images/memories/food1.png",
+    "locationName": "Chauraha",
+    "tags": ["#Happy", "#Together", "#Food"],
+    "moodColor": "0xFFEF476F",
+    "iconKey": "food"
+  },
+  {
+    "id": 27,
+    "title": "She's HOT",
+    "date": "2022-07-10",
+    "description": "Yes She's SUPER Hot Sometimes",
+    "imagePath": "assets/images/memories/hot1.png",
+    "locationName": "Kathmandu",
+    "tags": ["#Hot", "#PetLukau"],
+    "moodColor": "0xFFEF476F",
+    "iconKey": "heart"
+  },
+  {
+    "id": 28,
+    "title": "Looking Eachother",
+    "date": "2022-07-23",
+    "description": "You Look Beautiful",
+    "imagePath": "assets/images/memories/together3.png",
+    "locationName": "Chauraha",
+    "tags": ["#Together", "#EyetoEye"],
+    "moodColor": "0xFFEF476F",
+    "iconKey": "heart"
+  },
+  {
+    "id": 29,
+    "title": "She's Sleeping",
+    "date": "2022-10-04",
+    "description": "She Sleeped Again While taking Photo",
+    "imagePath": "assets/images/memories/together4.png",
+    "locationName": "Trivani",
+    "tags": ["#Together", "#Trivani"],
+    "moodColor": "0xFF8B5CF6",
+    "iconKey": "star"
+  },
+  {
+    "id": 30,
+    "title": "Birthday",
+    "date": "2022-10-20",
+    "description": "You Gave me a cake present. ",
+    "imagePath": "assets/images/memories/cake.png",
+    "locationName": "home",
+    "tags": ["#Bday", "#Present", "#Love"],
+    "moodColor": "0xFFEF476F",
+    "iconKey": "cake"
+  },
+  {
+    "id": 31,
+    "title": "Going Somewhere",
+    "date": "2022-11-30",
+    "description": "Where are we going Darling?  ",
+    "imagePath": "assets/images/memories/travel1.png",
+    "locationName": "Unknown",
+    "tags": ["#Where", "#Bus", "#Together"],
+    "moodColor": "0xFF3B82F6",
+    "iconKey": "car"
+  },
+  {
+    "id": 35,
+    "title": "Short Trip",
+    "date": "2024-04-09",
+    "description": "We are going for a short Trip To Palpa",
+    "imagePath": "assets/images/memories/palpa1.png",
+    "locationName": "Palpa-srinagar",
+    "tags": ["#Palpa", "#Night", "#Tour"],
+    "moodColor": "0xFF8B5CF6",
+    "iconKey": "plane"
   }
 ]
